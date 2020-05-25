@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+psutil = "==5.6.7"
+aiohttp = "==3.6.2"
+
+[dev-packages]
+mypy = "*"
+pytest = "*"
+flake8 = "*"
+autopep8 = "*"
+rope = "*"
+debugpy = "==1.0.0b9"
+
+[requires]
+python_version = "3.8"
+
+[packages.python-socketio]
+extras = [ "asyncio-client",]

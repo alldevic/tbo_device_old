@@ -1,0 +1,29 @@
+version: "3.4"
+
+services:
+  device:
+    container_name: tbo_device
+    env_file: .env
+    user: ${CURRENT_UID}
+    build:
+      context: .
+      args:
+        - DEBUG=${DEBUG}
+      target: deploy
+    restart: on-failure
+    volumes: 
+        - .:/app/
+    entrypoint: ["python3"]
+    command: ["./main.py"]
+    networks:
+      private_network:
+        ipv4_address: 172.20.0.25
+
+
+networks:
+  private_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+
