@@ -11,14 +11,14 @@ services:
         - DEBUG=${DEBUG}
       target: deploy
     restart: on-failure
-    volumes: 
-        - .:/app/
-    entrypoint: ["python3"]
-    command: ["./main.py"]
+    volumes:
+      - .:/app/
+    ports:
+      - 5678:5678
+    command: ["./docker-entrypoint.sh"]
     networks:
       private_network:
         ipv4_address: 172.20.0.25
-
 
 networks:
   private_network:
@@ -26,4 +26,3 @@ networks:
       driver: default
       config:
         - subnet: 172.20.0.0/16
-
