@@ -1,22 +1,24 @@
-FROM alpine:3.11.6 AS build
+FROM alpine:3.12.0 AS build
 ARG DEBUG
 ENV PYTHONUNBUFFERED 1
 RUN mkdir -p /app 
 RUN apk add --no-cache python3 py3-psutil py3-aiohttp
 RUN if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi 
-RUN apk add --no-cache --virtual .build-deps python3-dev build-base
-RUN pip3 install --disable-pip-version-check --no-cache-dir pipenv
+RUN apk add --no-cache --virtual .build-deps py3-pip
+RUN pip install --disable-pip-version-check --no-cache-dir pipenv
 WORKDIR /app
 COPY Pipfile Pipfile.lock /app/
 
 RUN if [[ "$DEBUG" == "TRUE" ]] || [[ "$DEBUG" == "True" ]] || [[ "$DEBUG" == "1" ]]; then \
     echo "Install with DEV packages"; \
+    apk add --no-cache py3-pytest py3-flake8; \
+    apk add --no-cache py3-rope py3-mypy py3-autopep8 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing; \
     pipenv install --system --deploy --ignore-pipfile --dev; \
     if [ ! -e /usr/bin/pip ]; then ln -sf pip3 /usr/bin/pip; fi; \
     else \
     echo "Install only PROD packages"; \
     pipenv install --system --deploy --ignore-pipfile; \
-    pip3 uninstall pipenv virtualenv virtualenv-clone pip -y; \
+    pip uninstall filelock pipenv virtualenv virtualenv-clone -y; \
     fi && \
     apk --purge del .build-deps  && \
     rm -rf /root/.cache /root/.local \
