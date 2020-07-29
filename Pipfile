@@ -4,12 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-psutil = "==5.7.2"
-aiohttp = "==3.6.2"
+psutil = "==5.7.0"
 
 [dev-packages]
-mypy = "*"
-pytest = "*"
 flake8 = "*"
 autopep8 = "*"
 rope = "*"

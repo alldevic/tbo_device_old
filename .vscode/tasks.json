@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "make up",
+            "label": "make upd",
             "type": "shell",
-            "command": "make up",
+            "command": "make upd",
             "presentation": {
                 "echo": false,
                 "reveal": "always",

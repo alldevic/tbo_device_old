@@ -8,9 +8,11 @@ CURRENT_UID := $(shell id -u):$(shell id -g)
 export CURRENT_UID
 
 up:
-	docker-compose up -d --force-recreate --build --remove-orphans
+	DEBUGPY=False docker-compose up -d --force-recreate --build --remove-orphans
+upd:
+	DEBUGPY=True docker-compose up -d --build
 down:
-	docker-compose down
+	DEBUGPY=True docker-compose down
 sh:
 	docker exec -it /tbo_device /bin/sh
 logs:

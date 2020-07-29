@@ -4,6 +4,8 @@ services:
   device:
     container_name: tbo_device
     env_file: .env
+    environment:
+      - DEBUGPY=${DEBUGPY}
     user: ${CURRENT_UID}
     build:
       context: .
@@ -12,7 +14,7 @@ services:
       target: deploy
     restart: on-failure
     volumes:
-      - .:/app/
+      - ./src/:/app/
     ports:
       - 5678:5678
     command: ["./docker-entrypoint.sh"]
