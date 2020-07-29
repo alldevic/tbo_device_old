@@ -4,16 +4,16 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-psutil = "==5.7.0"
+psutil = "==5.7.2"
 aiohttp = "==3.6.2"
 
 [dev-packages]
-mypy = "==0.770"
-pytest = "==5.4.2"
-flake8 = "==3.8.2"
-autopep8 = "==1.5.2"
-rope = "==0.17.0"
-debugpy = "==1.0.0b9"
+mypy = "*"
+pytest = "*"
+flake8 = "*"
+autopep8 = "*"
+rope = "*"
+debugpy = "==1.0.0b12"
 
 [requires]
 python_version = "3.8"
